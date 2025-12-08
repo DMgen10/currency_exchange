@@ -1,32 +1,29 @@
 package model;
 
+import java.util.Objects;
+
 public class Currency {
 
-    private long id;          // айди валюты
-    private String code;      // код валюты
-    private String sign;      // знак валюты
-    private String fullName;  // Полное имя валюты
+    private int id;
+    private String code;
+    private String fullName;
+    private String sign;
 
-    public Currency(long id, String code, String sign, String fullName) {
+    public Currency(){
+    }
+
+    public Currency(int id, String code, String fullName, String sign) {
         this.id = id;
         this.code = code;
-        this.sign = sign;
         this.fullName = fullName;
+        this.sign = sign;
     }
 
-    public String getSign() {
-        return sign;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -36,5 +33,42 @@ public class Currency {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Currency currency)) return false;
+        return id == currency.id && Objects.equals(code, currency.code) && Objects.equals(fullName, currency.fullName) && Objects.equals(sign, currency.sign);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, code, fullName, sign);
+    }
+
+    @Override
+    public String toString() {
+        return "Currency{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", sign='" + sign + '\'' +
+                '}';
     }
 }
