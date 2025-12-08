@@ -1,28 +1,23 @@
 package model;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class ExchangeRate {
 
-    // Класс для валютных пар
+    private int id;
+    private Currency baseCurrency;
+    private Currency targetCurrency;
+    private BigDecimal rate;
 
-    private long id;                    // айди
-    private Currency baseCurrency;      // изначальная валюта
-    private Currency targetCurrency;    // целевая валюта
-    private BigDecimal rate;            // курс
-
-    public ExchangeRate(long id, Currency baseCurrency, Currency targetCurrency, BigDecimal rate) {
-        this.id = id;
-        this.baseCurrency = baseCurrency;
-        this.targetCurrency = targetCurrency;
-        this.rate = rate;
+    public ExchangeRate(){
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -48,5 +43,26 @@ public class ExchangeRate {
 
     public void setRate(BigDecimal rate) {
         this.rate = rate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ExchangeRate rate1)) return false;
+        return id == rate1.id && Objects.equals(baseCurrency, rate1.baseCurrency) && Objects.equals(targetCurrency, rate1.targetCurrency) && Objects.equals(rate, rate1.rate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, baseCurrency, targetCurrency, rate);
+    }
+
+    @Override
+    public String toString() {
+        return "ExchangeRate{" +
+                "id=" + id +
+                ", baseCurrency=" + baseCurrency +
+                ", targetCurrency=" + targetCurrency +
+                ", rate=" + rate +
+                '}';
     }
 }
